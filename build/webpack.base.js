@@ -4,6 +4,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 分离css
 
 module.exports = (env) => {
   console.log(env);
@@ -32,12 +33,15 @@ module.exports = (env) => {
       rules: [
         {
           test: /\.css$/,
-          use: ['style-loader', {
-            loader: 'css-loader',
-            options: { // 意思是，如果在css中引入(@import)了其他文件css,而这个css文件中引入了less,将用less-loader处理
-              importLoaders: 2
-            }
-          },'postcss-loader', 'less-loader'] // 从右往左
+          use: [
+            // 开发模式下用style-loader
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader, {
+              loader: 'css-loader',
+              options: { // 意思是，如果在css中引入(@import)了其他文件css,而这个css文件中引入了less,将用less-loader处理
+                importLoaders: 2
+              }
+            },'postcss-loader', 'less-loader'
+          ] // 从右往左
         },
         {
           test: /\.less$/,
@@ -47,6 +51,10 @@ module.exports = (env) => {
     },
     plugins: [
       new CleanWebpackPlugin(),
+      // 开发模式下不抽离css,此时返回false
+      !isDev && new MiniCssExtractPlugin({
+        filename: `css/[name].[hash:8].css`
+      }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         filename: 'index.html',
@@ -58,7 +66,7 @@ module.exports = (env) => {
         }
         // chunks: ['index', 'AOP', 'iterator'] // index.html 引入index.js
       })
-    ]
+    ].filter(Boolean) // 过滤数组中的false
   }
 
   if(isDev) { // 开发模式
