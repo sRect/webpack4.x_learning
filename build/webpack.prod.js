@@ -1,5 +1,8 @@
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); // 混淆压缩js
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -34,5 +37,8 @@ module.exports = {
         },
       }),
     ]
-  }
+  },
+  plugins: [
+    new CleanWebpackPlugin()
+  ]
 }

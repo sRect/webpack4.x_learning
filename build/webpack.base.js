@@ -3,7 +3,6 @@ const prod = require('./webpack.prod');
 const path = require('path');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 分离css
 
 module.exports = (env) => {
@@ -46,11 +45,21 @@ module.exports = (env) => {
         {
           test: /\.less$/,
           use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'] // 从右往左
+        },
+        {
+          test: /\.(jpe?g|png|gif)$/,
+          use: {
+            loader: 'url-loader',
+              options: {
+                limit: 100*1024, // 如果大于100k图片，会默认使用file-loader(file-loader作用就是拷贝)
+                outputPath: 'images/',
+                name: '[name].[hash:8].[ext]'
+              }
+          }
         }
       ]
     },
     plugins: [
-      new CleanWebpackPlugin(),
       // 开发模式下不抽离css,此时返回false
       !isDev && new MiniCssExtractPlugin({
         filename: `css/[name].[hash:8].css`
