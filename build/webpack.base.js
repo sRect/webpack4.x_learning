@@ -28,6 +28,23 @@ module.exports = (env) => {
         '@': path.resolve(__dirname, '../src')
       }
     },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: ['style-loader', {
+            loader: 'css-loader',
+            options: { // 意思是，如果在css中引入(@import)了其他文件css,而这个css文件中引入了less,将用less-loader处理
+              importLoaders: 2
+            }
+          },'postcss-loader', 'less-loader'] // 从右往左
+        },
+        {
+          test: /\.less$/,
+          use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'] // 从右往左
+        }
+      ]
+    },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
