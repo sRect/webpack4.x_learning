@@ -50,7 +50,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            limit: 100 * 1024, // 如果大于100k图片，会默认使用file-loader(file-loader作用就是拷贝)
+            limit: 8 * 1024, // 如果大于8k图片，会默认使用file-loader(file-loader作用就是拷贝)
             outputPath: 'images/',
             name: '[name].[hash:8].[ext]'
           }
