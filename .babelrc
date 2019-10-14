@@ -11,7 +11,8 @@
     // 去除重复代码
     // A plugin that enables the re-use of Babel's injected helper code to save on codesize
     ["@babel/plugin-transform-runtime", {
-      "corejs": 2,
+      // 上面写了，这里就不用写了
+      // "corejs": 2, // you can directly import "core-js" or use @babel/preset-env's useBuiltIns option.
       "helpers": true, // 默认
       "regenerator": false, // 通过 preset-env 已经使用了全局的 regeneratorRuntime, 不再需要 transform-runtime 提供的 不污染全局的 regeneratorRuntime
       "useESModules": true // 使用 es modules helpers, 减少 commonJS 语法代码
