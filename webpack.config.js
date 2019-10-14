@@ -1,10 +1,13 @@
-// const path = require('path');
-// module.exports = {
-//   mode: 'development',
-//   entry: path.resolve(__dirname, './src/js/index.js'),
-//   output: {
-//     filename: 'bundle.js',
-//     path: path.resolve(__dirname, 'dist')
-//   }
-// }
+const base = require('./build/webpack.base');
+const dev = require('./build/webpack.dev');
+const prod = require('./build/webpack.prod');
+const merge = require('webpack-merge');
+const isDev = process.env.NODE_ENV;
+
+module.exports = () => {
+  console.log(`currentMode:${isDev}`);
+  // let isDev = env.development;
+
+  return isDev ? merge(base, dev) : merge(base, prod);
+}
 

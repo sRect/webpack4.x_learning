@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --env.development --config ./build/webpack.base.js",
-    "server": "webpack-dev-server --env.development --config ./build/webpack.base.js",
-    "build": "webpack --env.production --config ./build/webpack.base.js"
+    "dev": "cross-env NODE_ENV=development webpack",
+    "server": "cross-env NODE_ENV=development webpack-dev-server",
+    "start": "npm run server",
+    "build": "cross-env NODE_ENV=production webpack"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "autoprefixer": "^9.6.4",
     "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^6.0.3",
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
