@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 分离css
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const copyWebpackPlugin = require("copy-webpack-plugin");
-const isDev = process.env.NODE_ENV;
+const isDev = process.env.NODE_ENV === 'development' ? true : false;
 
 module.exports = {
   entry: path.resolve(__dirname, '../src/js/index.js'),
