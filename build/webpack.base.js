@@ -4,6 +4,8 @@ const path = require('path');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 分离css
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 
 module.exports = (env) => {
   console.log(env);
@@ -74,6 +76,12 @@ module.exports = (env) => {
           removeAttributeQuotes: true // 去除双引号
         }
         // chunks: ['index', 'AOP', 'iterator'] // index.html 引入index.js
+      }),
+      new FriendlyErrorsWebpackPlugin(),
+      new WebpackBuildNotifierPlugin({
+        title: "My Project Webpack Build",
+        // logo: path.resolve("./img/favicon.png"),
+        suppressSuccess: true
       })
     ].filter(Boolean) // 过滤数组中的false
   }
