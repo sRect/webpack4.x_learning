@@ -45,6 +45,10 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'], // 从右往左
         exclude: /node_modules/
       },
+      { // 图标的处理
+        test: /\.(woff|ttf|eot|svg)$/,
+        use: 'file-loader'
+      },
       {
         test: /\.(jpe?g|png|gif)$/,
         use: {
