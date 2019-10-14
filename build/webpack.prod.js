@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); // 混淆压缩js
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -38,6 +39,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    // https://webpack.js.org/plugins/banner-plugin/
+    new webpack.BannerPlugin({
+      banner: 'hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]',
+      entryOnly: true
+    })
   ]
 }
