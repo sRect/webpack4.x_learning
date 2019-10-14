@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 分离css
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
+const copyWebpackPlugin = require("copy-webpack-plugin");
 const isDev = process.env.NODE_ENV;
 
 module.exports = {
@@ -73,6 +74,10 @@ module.exports = {
       }
       // chunks: ['index', 'AOP', 'iterator'] // index.html 引入index.js
     }),
+    new copyWebpackPlugin([{
+      from: path.resolve(__dirname, '../static'), //要打包的静态资源目录地址
+      to: './static', //要打包到的文件夹路径，跟随output配置中的目录。所以不需要再自己加__dirname
+    }]),
     new FriendlyErrorsWebpackPlugin(),
     new WebpackBuildNotifierPlugin({
       title: "My Project Webpack Build",
