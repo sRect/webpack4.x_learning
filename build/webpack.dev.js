@@ -1,11 +1,11 @@
 const { join } = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   devtool: "cheap-module-eval-source-map",
   mode: 'development',
   plugins: [
-    new BundleAnalyzerPlugin()
+    new CleanWebpackPlugin()
   ],
   devServer: {
     contentBase: join(__dirname, '../dist'),

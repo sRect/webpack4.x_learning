@@ -28,6 +28,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.css$/,
         use: [
           // 开发模式下用style-loader
@@ -46,11 +51,11 @@ module.exports = {
         exclude: /node_modules/
       },
       { // 图标的处理
-        test: /\.(woff|ttf|eot|svg)$/,
+        test: /\.(woff|ttf|eot)$/,
         use: 'file-loader'
       },
       {
-        test: /\.(jpe?g|png|gif)$/,
+        test: /\.(jpe?g|png|gif|svg)$/,
         use: {
           loader: 'url-loader',
           options: {

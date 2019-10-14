@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); // 混淆压缩js
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   devtool: '#source-map', // 线上生成配置
@@ -40,6 +41,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
     // https://webpack.js.org/plugins/banner-plugin/
     new webpack.BannerPlugin({
       banner: 'hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]',

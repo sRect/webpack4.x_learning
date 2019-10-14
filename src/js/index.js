@@ -17,3 +17,30 @@ img.onload = function() {
 pic.onload = function () {
   document.body.appendChild(pic);
 }
+
+const fn = () => {
+  console.log("ff");
+}
+
+fn();
+
+class Foo {
+  constructor() {
+    this.a = 1;
+  }
+}
+
+console.log(Foo.a);
+
+// 草案语法
+@log
+class A {
+  a = 1;
+}
+
+function log(target) {
+  console.log(target)
+}
+
+let arr = [1,2,[1, [1,2]],3].flat(Infinity);
+console.log(arr)
