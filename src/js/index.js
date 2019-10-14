@@ -1,3 +1,4 @@
+import "./test_react";
 import '../css/base.less';
 require('../css/index.css');
 import logo from '../img/demo.jpeg';
@@ -44,3 +45,4 @@ function log(target) {
 
 let arr = [1,2,[1, [1,2]],3].flat(Infinity);
 console.log(arr)
+

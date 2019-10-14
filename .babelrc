@@ -4,7 +4,8 @@
       "modules": false, // 模块使用 es modules ，不使用 commonJS 规范
       "useBuiltIns": "usage", // usage-按需引入 entry-入口引入（整体引入） false-不引入polyfill
       "corejs": 2 // 就是以前的babel-polyfill
-    }]
+    }],
+    "@babel/preset-react"
   ],
   "plugins": [
     // https://babeljs.io/docs/en/babel-plugin-transform-runtime#docsNav
