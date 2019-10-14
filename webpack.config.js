@@ -8,6 +8,6 @@ module.exports = () => {
   console.log(`currentMode:${isDev}`);
   // let isDev = env.development;
 
-  return isDev ? merge(base, dev) : merge(base, prod);
+  return isDev === 'development' ? merge(base, dev) : merge(base, prod);
 }
 

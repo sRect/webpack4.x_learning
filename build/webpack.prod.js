@@ -1,10 +1,9 @@
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); // 混淆压缩js
-const {
-  CleanWebpackPlugin
-} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  devtool: '#source-map', // 线上生成配置
   mode: 'production',
   optimization: { // 优化项
     minimizer: [ // 放置压缩方案
