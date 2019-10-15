@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const { join } = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -5,7 +6,9 @@ module.exports = {
   devtool: "cheap-module-eval-source-map",
   mode: 'development',
   plugins: [
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
   ],
   devServer: {
     contentBase: join(__dirname, '../dist'),

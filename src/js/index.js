@@ -46,3 +46,7 @@ function log(target) {
 let arr = [1,2,[1, [1,2]],3].flat(Infinity);
 console.log(arr)
 
+// 用于热更新
+if (module.hot) {
+  module.hot.accept();
+}
