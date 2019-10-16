@@ -3,6 +3,7 @@ import '../css/base.less';
 require('../css/index.css');
 import logo from '../img/demo.jpeg';
 import photo from '../img/11.jpeg';
+import moment from 'moment';
 
 let a = 1;
 console.log(a);
@@ -45,6 +46,9 @@ function log(target) {
 
 let arr = [1,2,[1, [1,2]],3].flat(Infinity);
 console.log(arr)
+console.log(A)
+
+document.getElementById('content').innerHTML = moment().format('MMMM Do YYYY, h:mm:ss a');
 
 // 用于热更新
 if (module.hot) {

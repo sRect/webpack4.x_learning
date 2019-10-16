@@ -1,13 +1,19 @@
 const webpack = require("webpack");
+const path = require('path');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); // 混淆压缩js
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
+const AddAssetHtmlCdnPlugin = require('add-asset-html-cdn-webpack-plugin');
+const cdnConfig = require('../config/cdn.config');
 
 module.exports = {
   devtool: '#source-map', // 线上生成配置
   mode: 'production',
+  externals: {
+    'moment': 'moment' // moment不打包
+  },
   optimization: { // 优化项
     runtimeChunk: { // 去除相同的webpack的运行文件，减少文件体积
       name: "manifest"
@@ -99,6 +105,7 @@ module.exports = {
       test: /\.(js|css|html)$/,
       threshold: 10240,
       minRatio: 0.8
-    })
+    }),
+    new AddAssetHtmlCdnPlugin(true, cdnConfig)
   ]
 }
