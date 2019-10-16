@@ -58,14 +58,40 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 8 * 1024, // 如果大于8k图片，会默认使用file-loader(file-loader作用就是拷贝)
-            outputPath: 'images/',
-            name: '[name].[hash:8].[ext]'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8 * 1024, // 如果大于8k图片，会默认使用file-loader(file-loader作用就是拷贝)
+              outputPath: 'images/',
+              name: '[name].[hash:8].[ext]'
+            }
+          },
+          !isDev && { // 可以在使用file-loader之前 对图片进行压缩
+            loader: "image-webpack-loader",
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // optipng.enabled: false will disable optipng
+              optipng: {
+                enabled: false
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75
+              }
+            }
           }
-        }
+        ]
       }
     ]
   },
