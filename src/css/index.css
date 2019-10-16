@@ -1,8 +1,12 @@
 @import './a.css';
 
-div {
+.app {
   width: 100px;
   height: 100px;
   background-color: red;
   margin: 30px auto;
+}
+
+.special {
+  color: blue;
 }

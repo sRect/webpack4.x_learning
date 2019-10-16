@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 分离css
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const copyWebpackPlugin = require("copy-webpack-plugin");
+const glob = require('glob');
+const PurgecssPlugin = require('purgecss-webpack-plugin'); // 消除无用的css(这个插件不靠谱)
 const isDev = process.env.NODE_ENV === 'development' ? true : false;
 
 module.exports = {
@@ -51,11 +53,11 @@ module.exports = {
         exclude: /node_modules/
       },
       { // 图标的处理
-        test: /\.(woff|ttf|eot)$/,
+        test: /\.(woff|ttf|eot|svg|otf)$/,
         use: 'file-loader'
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/,
+        test: /\.(jpe?g|png|gif)$/,
         use: {
           loader: 'url-loader',
           options: {
@@ -72,6 +74,9 @@ module.exports = {
     !isDev && new MiniCssExtractPlugin({
       filename: `css/[name].[hash:8].css`
     }),
+    // !isDev && new PurgecssPlugin({
+    //   paths: glob.sync(`${path.join(__dirname, "../src")}/**/*`, { nodir: true }) // 不匹配目录，只匹配文件
+    // }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
       filename: 'index.html',
