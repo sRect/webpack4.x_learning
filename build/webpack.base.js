@@ -91,7 +91,7 @@ module.exports = {
               }
             }
           }
-        ]
+        ].filter(Boolean)
       }
     ]
   },

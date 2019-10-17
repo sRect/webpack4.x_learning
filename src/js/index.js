@@ -4,9 +4,11 @@ require('../css/index.css');
 import logo from '../img/demo.jpeg';
 import photo from '../img/11.jpeg';
 import moment from 'moment';
+import { sum, d } from'./calc';
 
 let a = 1;
 console.log(a);
+console.log(sum(1, 2))
 
 let img = document.createElement('img');
 let pic = document.createElement('img');
@@ -48,7 +50,7 @@ let arr = [1,2,[1, [1,2]],3].flat(Infinity);
 console.log(arr)
 console.log(A)
 
-document.getElementById('content').innerHTML = moment().format('MMMM Do YYYY, h:mm:ss a');
+document.getElementById('content').innerHTML = moment().format('MMMM Do YYYY, h:mm:ss a') + '------' + sum(1, 2) + '----d='+d;
 
 // 用于热更新
 if (module.hot) {

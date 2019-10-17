@@ -5,6 +5,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   devtool: "cheap-module-eval-source-map",
   mode: 'development',
+  // https://webpack.js.org/guides/tree-shaking/#add-a-utility
+  // 开发环境下默认tree-shaking不会生效,可以配置后生效
+  optimization: {
+    usedExports: true, // js Tree Shaking
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
