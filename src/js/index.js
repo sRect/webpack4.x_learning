@@ -6,6 +6,7 @@ import photo from '../img/11.jpeg';
 import moment from 'moment';
 import { sum, d } from'./calc';
 
+const btn = document.getElementById("btn");
 let a = 1;
 console.log(a);
 console.log(sum(1, 2))
@@ -51,6 +52,15 @@ console.log(arr)
 console.log(A)
 
 document.getElementById('content').innerHTML = moment().format('MMMM Do YYYY, h:mm:ss a') + '------' + sum(1, 2) + '----d='+d;
+
+btn.addEventListener("click", () => {
+  import(/* webpackChunkName: "res" */ './res').then(data => {
+    let fn = data.default;
+    fn().then((val) => {
+      alert(val)
+    })
+  })
+})
 
 // 用于热更新
 if (module.hot) {

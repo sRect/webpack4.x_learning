@@ -18,6 +18,7 @@ module.exports = {
   // },
   output: {
     filename: '[name].[hash:8].js',
+    chunkFilename: '[name].[hash:8].min.js',
     path: path.resolve(__dirname, '../dist')
   },
   resolve: {
