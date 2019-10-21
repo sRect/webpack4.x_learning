@@ -2,8 +2,14 @@ const webpack = require('webpack');
 const { join, resolve } = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin');
+const smp = new SpeedMeasureWebpackPlugin({
+  pluginNames: {
+    customAddAssetHtmlWebpackPluginName: AddAssetHtmlWebpackPlugin
+  }
+});
 
-module.exports = {
+module.exports = smp.wrap({
   devtool: "cheap-module-eval-source-map",
   mode: 'development',
   // https://webpack.js.org/guides/tree-shaking/#add-a-utility
@@ -37,4 +43,4 @@ module.exports = {
       "/api": "http://localhost:3000"
     }
   }
-}
+})

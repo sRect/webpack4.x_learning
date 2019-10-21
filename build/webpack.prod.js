@@ -7,8 +7,14 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const CompressionPlugin = require('compression-webpack-plugin');
 const AddAssetHtmlCdnPlugin = require('add-asset-html-cdn-webpack-plugin');
 const cdnConfig = require('../config/cdn.config');
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin');
+const smp = new SpeedMeasureWebpackPlugin({
+  pluginNames: {
+    customAddAssetHtmlCdnPluginName: AddAssetHtmlCdnPlugin,
+  }
+});
 
-module.exports = {
+module.exports = smp.wrap({
   devtool: '#source-map', // 线上生成配置
   mode: 'production',
   externals: {
@@ -110,4 +116,4 @@ module.exports = {
     }),
     new AddAssetHtmlCdnPlugin(true, cdnConfig)
   ]
-}
+})
