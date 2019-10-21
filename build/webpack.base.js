@@ -6,6 +6,7 @@ const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const copyWebpackPlugin = require("copy-webpack-plugin");
 const glob = require('glob');
 const PurgecssPlugin = require('purgecss-webpack-plugin'); // 消除无用的css(这个插件不靠谱)
+const HappyPack = require('happypack');
 const isDev = process.env.NODE_ENV === 'development' ? true : false;
 
 module.exports = {
@@ -32,7 +33,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: 'happypack/loader?id=babel',
         exclude: /node_modules/
       },
       {
@@ -50,7 +51,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'], // 从右往左
+        use: 'happypack/loader?id=less', // 从右往左
         exclude: /node_modules/
       },
       { // 图标的处理
@@ -119,6 +120,16 @@ module.exports = {
       from: path.resolve(__dirname, '../static'), //要打包的静态资源目录地址
       to: './static', //要打包到的文件夹路径，跟随output配置中的目录。所以不需要再自己加__dirname
     }]),
+    new HappyPack({
+      id: 'babel',
+      threads: 4,
+      loaders: ['babel-loader']
+    }),
+    new HappyPack({
+      id: 'less',
+      threads: 4,
+      loaders: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+    }),
     new FriendlyErrorsWebpackPlugin(),
     new WebpackBuildNotifierPlugin({
       title: "My Project Webpack Build",
