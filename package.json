@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack",
-    "dll": "webpack --config build/webpack.dll.js",
-    "server": "cross-env NODE_ENV=development webpack-dev-server",
+    "dev": "cross-env NODE_ENV=development webpack --progress",
+    "dll": "webpack --config build/webpack.dll.js --progress --display-modules --display-reasons",
+    "server": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --progress",
     "start": "npm run server",
-    "build": "cross-env NODE_ENV=production webpack"
+    "build": "cross-env NODE_ENV=production webpack --progress"
   },
   "keywords": [],
   "author": "",
