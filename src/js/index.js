@@ -62,6 +62,8 @@ btn.addEventListener("click", () => {
   })
 })
 
+console.log('==========',VERSION);
+
 // 用于热更新
 if (module.hot) {
   module.hot.accept();

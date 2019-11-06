@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 分离css
@@ -129,6 +130,9 @@ module.exports = {
       id: 'less',
       threads: 4,
       loaders: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+    }),
+    new webpack.DefinePlugin({
+      'VERSION': '123'
     }),
     new FriendlyErrorsWebpackPlugin(),
     new WebpackBuildNotifierPlugin({
