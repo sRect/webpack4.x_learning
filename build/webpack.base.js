@@ -131,8 +131,11 @@ module.exports = {
       threads: 4,
       loaders: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
     }),
-    new webpack.DefinePlugin({
+    new webpack.DefinePlugin({ // 定义全局变量
       'VERSION': '123'
+    }),
+    new webpack.ProvidePlugin({ // 变量暴露给全局window
+      $: 'jQuery'
     }),
     new FriendlyErrorsWebpackPlugin(),
     new WebpackBuildNotifierPlugin({
